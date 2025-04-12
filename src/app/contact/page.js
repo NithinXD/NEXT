@@ -86,8 +86,8 @@ export default function Contact() {
                   </div>
                   <div className="ml-3 text-gray-700">
                     <p className="font-medium">Address</p>
-                    <p>123 Relaxation Avenue</p>
-                    <p>Serenity City, SC 12345</p>
+                    <p>1965 Relaxation Avenue</p>
+                    <p>Madurai, Tamil Nadu, 625017</p>
                   </div>
                 </div>
                 
@@ -99,7 +99,7 @@ export default function Contact() {
                   </div>
                   <div className="ml-3 text-gray-700">
                     <p className="font-medium">Phone</p>
-                    <p>(123) 456-7890</p>
+                    <p>+91 8838745128</p>
                   </div>
                 </div>
                 
@@ -111,7 +111,7 @@ export default function Contact() {
                   </div>
                   <div className="ml-3 text-gray-700">
                     <p className="font-medium">Email</p>
-                    <p>info@spabooking.com</p>
+                    <p>nithindeepak2004@gmail.com</p>
                   </div>
                 </div>
                 
@@ -123,9 +123,7 @@ export default function Contact() {
                   </div>
                   <div className="ml-3 text-gray-700">
                     <p className="font-medium">Hours</p>
-                    <p>Monday - Friday: 9am - 8pm</p>
-                    <p>Saturday: 10am - 6pm</p>
-                    <p>Sunday: 11am - 5pm</p>
+                    <p>Monday - Friday: 9am - 7pm</p>
                   </div>
                 </div>
               </div>

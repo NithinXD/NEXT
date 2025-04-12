@@ -99,10 +99,10 @@ export default function Footer() {
           <div className="col-span-1">
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
             <address className="not-italic text-gray-300 space-y-2">
-              <p>123 Relaxation Avenue</p>
-              <p>Serenity City, SC 12345</p>
-              <p>Phone: (123) 456-7890</p>
-              <p>Email: info@spabooking.com</p>
+              <p>1965 Relaxation Avenue</p>
+              <p>Madurai, Tamil Nadu, 625017</p>
+              <p>Phone: +91 8838745128</p>
+              <p>Email: nithindeepak2004@gmail.com</p>
             </address>
             <div className="mt-4">
               <h4 className="text-sm font-semibold mb-2">Hours</h4>

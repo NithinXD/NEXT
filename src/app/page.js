@@ -132,13 +132,11 @@ export default function Home() {
             </div>
             <div className="md:w-1/2">
               <h3 className="text-2xl font-semibold mb-4">Visit Us</h3>
-              <p className="text-gray-600 mb-2">123 Relaxation Avenue</p>
-              <p className="text-gray-600 mb-2">Serenity City, SC 12345</p>
-              <p className="text-gray-600 mb-6">Phone: (123) 456-7890</p>
+              <p className="text-gray-600 mb-2">1965 Relaxation Avenue</p>
+              <p className="text-gray-600 mb-2">Madurai, Tamil Nadu, 625017</p>
+              <p className="text-gray-600 mb-6">Phone: +91 8838745128</p>
               <h4 className="text-xl font-semibold mb-2">Hours</h4>
-              <p className="text-gray-600 mb-1">Monday - Friday: 9am - 8pm</p>
-              <p className="text-gray-600 mb-1">Saturday: 10am - 6pm</p>
-              <p className="text-gray-600 mb-6">Sunday: 11am - 5pm</p>
+              <p className="text-gray-600 mb-1">Monday - Friday: 9am - 7pm</p>
               <Link href="/contact" className="btn-primary">
                 Contact Us
               </Link>
