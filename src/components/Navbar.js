@@ -40,7 +40,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white shadow-md">
+    <nav className="bg-white shadow-md relative z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
@@ -96,7 +96,7 @@ export default function Navbar() {
             {loading ? (
               <div className="h-8 w-8 rounded-full bg-gray-200 animate-pulse"></div>
             ) : user ? (
-              <div className="ml-3 relative">
+              <div className="ml-3 relative z-50">
                 <div>
                   <button
                     type="button"
@@ -115,7 +115,7 @@ export default function Navbar() {
 
                 {isMenuOpen && (
                   <div
-                    className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                    className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="user-menu-button"
@@ -222,7 +222,7 @@ export default function Navbar() {
 
       {/* Mobile menu, show/hide based on menu state */}
       {isMenuOpen && (
-        <div className="sm:hidden" id="mobile-menu">
+        <div className="sm:hidden z-50" id="mobile-menu">
           <div className="pt-2 pb-3 space-y-1">
             <Link
               href="/"
