@@ -80,7 +80,7 @@ export default function Chatbot() {
 
     try {
       // Call the FastAPI backend
-      const response = await fetch('http://localhost:5432/api/chat', {
+      const response = await fetch('https://rag-l6ua.onrender.com/api/chat', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
