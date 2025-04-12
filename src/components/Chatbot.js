@@ -171,7 +171,7 @@ export default function Chatbot() {
         
         {/* Login prompt tooltip */}
         {isOpen && (
-          <div className="absolute bottom-16 right-0 bg-white rounded-lg shadow-lg p-4 border border-gray-200 w-64">
+          <div className="fixed md:absolute bottom-0 md:bottom-16 right-0 w-full md:w-64 max-w-full bg-white rounded-t-lg md:rounded-lg shadow-lg p-4 border border-gray-200">
             <div className="flex justify-between items-center mb-3">
               <h3 className="font-semibold text-gray-800">Chat Assistant</h3>
               <button
@@ -219,7 +219,7 @@ export default function Chatbot() {
 
       {/* Chat window */}
       {isOpen && (
-        <div className="absolute bottom-16 right-0 w-96 bg-white rounded-lg shadow-xl overflow-hidden flex flex-col border border-gray-200" style={{ height: '50vh' }}>
+        <div className="fixed md:absolute bottom-0 md:bottom-16 right-0 w-full md:w-96 max-w-full md:max-w-md bg-white rounded-t-lg md:rounded-lg shadow-xl overflow-hidden flex flex-col border border-gray-200 h-[70vh] md:h-[50vh]">
           {/* Chat header */}
           <div className="bg-blue-600 text-white px-4 py-3 flex justify-between items-center">
             <h3 className="font-semibold">Spa Assistant</h3>
@@ -234,14 +234,14 @@ export default function Chatbot() {
           </div>
 
           {/* Chat messages */}
-          <div className="flex-1 p-4 overflow-y-auto bg-gray-50" style={{ height: 'calc(50vh - 130px)' }}>
+          <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
             {messages.map((message, index) => (
               <div
                 key={index}
                 className={`mb-3 ${message.role === 'user' ? 'text-right' : 'text-left'}`}
               >
                 <div
-                  className={`inline-block px-4 py-2 rounded-lg ${
+                  className={`inline-block px-4 py-2 rounded-lg max-w-[85%] break-words ${
                     message.role === 'user'
                       ? 'bg-blue-600 text-white'
                       : 'bg-gray-200 text-gray-800'
@@ -266,7 +266,7 @@ export default function Chatbot() {
           </div>
           
           {/* Chat input */}
-          <form onSubmit={handleSubmit} className="border-t border-gray-200 p-4 bg-white">
+          <form onSubmit={handleSubmit} className="border-t border-gray-200 p-3 bg-white">
             <div className="flex relative">
               <div className="relative flex-1 flex items-center">
                 <input
@@ -274,7 +274,7 @@ export default function Chatbot() {
                   value={inputValue}
                   onChange={handleInputChange}
                   placeholder="Type your message..."
-                  className="flex-1 input-field pr-10"
+                  className="flex-1 input-field pr-10 w-full"
                   disabled={isLoading}
                 />
                 {/* Help button (dot) */}
@@ -289,7 +289,7 @@ export default function Chatbot() {
 
                 {/* Suggestions dropdown */}
                 {showSuggestions && (
-                  <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-md shadow-lg border border-gray-200 z-10">
+                  <div className="absolute bottom-full left-0 right-0 mb-2 bg-white rounded-md shadow-lg border border-gray-200 z-10 max-h-[40vh] overflow-y-auto">
                     <div className="p-2">
                       <h4 className="text-sm font-semibold text-gray-700 mb-2">Suggested questions:</h4>
                       <ul className="space-y-1">
@@ -329,7 +329,7 @@ export default function Chatbot() {
               <button
                 type="submit"
                 disabled={isLoading || !inputValue.trim()}
-                className="ml-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md px-4 py-2 disabled:opacity-50"
+                className="ml-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md px-3 py-2 disabled:opacity-50 flex-shrink-0"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
