@@ -136,7 +136,7 @@ export default function Home() {
               <p className="text-gray-600 mb-2">Madurai, Tamil Nadu, 625017</p>
               <p className="text-gray-600 mb-6">Phone: +91 8838745128</p>
               <h4 className="text-xl font-semibold mb-2">Hours</h4>
-              <p className="text-gray-600 mb-1">Monday - Friday: 9am - 7pm</p>
+              <p className="text-gray-600 mb-1">Monday - Sunday: 9am - 7pm</p>
               <Link href="/contact" className="btn-primary">
                 Contact Us
               </Link>

@@ -36,7 +36,7 @@ export default function Booking() {
   };
 
   useEffect(() => {
-    // Check if user is logged in
+    // Check user(login)
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {

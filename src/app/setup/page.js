@@ -49,7 +49,7 @@ export default function SetupPage() {
     setSuccess(false);
 
     try {
-      // First, check if the table exists and has data
+      //check table exists
       const { count, error: countError } = await supabase
         .from('services')
         .select('*', { count: 'exact', head: true });

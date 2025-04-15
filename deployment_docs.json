@@ -1,0 +1,20 @@
+{
+  "sections": [
+    {
+      "title": "Bot - Agno with Gemini",
+      "content": "Bot is designed using **agno,** **gemini** and **pinecone**. It communicates through **FastAPI**, and is hosted as a **Docker container** on **Render.com**.\n The FastAPI connection is maintained for easy testing on localhost."
+    },
+    {
+      "title": "Website - Next.js",
+      "content": "The website is built using **Next.js** and is hosted on **Vercel**."
+    },
+    {
+      "title": "Data Storage - Supabase",
+      "content": "**Supabase** is used for **storing services and user bookings**. **Realtime data** is stored there, and the **chatbot connects to Supabase** to retrieve these values."
+    },
+    {
+      "title": "Web Search - Serper",
+      "content": "The **Serper API** is used for web search in case the data in the database is insufficient."
+    }
+  ]
+}

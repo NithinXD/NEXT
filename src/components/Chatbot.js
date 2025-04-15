@@ -2,16 +2,64 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import ReactMarkdown from 'react-markdown';
 import supabase from '../lib/supabase';
 
+// Helper function to escape HTML
+const escapeHtml = (unsafe) => {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+};
+
 export default function Chatbot() {
+  // CSS for markdown content
+  const markdownStyles = `
+    .markdown-content {
+      font-size: inherit;
+      line-height: 1.5;
+    }
+    .markdown-content p:last-child {
+      margin-bottom: 0;
+    }
+    .markdown-content pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      margin: 0.5rem 0;
+    }
+    .markdown-content blockquote {
+      border-left: 3px solid #cbd5e0;
+      padding-left: 1rem;
+      margin: 0.5rem 0;
+      color: #4a5568;
+    }
+    .markdown-content table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 0.5rem 0;
+    }
+    .markdown-content th, .markdown-content td {
+      border: 1px solid #e2e8f0;
+      padding: 0.25rem 0.5rem;
+      text-align: left;
+    }
+    .markdown-content th {
+      background-color: #f7fafc;
+    }
+  `;
   const [isOpen, setIsOpen] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [user, setUser] = useState(null);
   const [messages, setMessages] = useState([
     {
       role: 'assistant',
-      content: 'Hello! I can help you book a spa service. What would you like to book today?'
+      content: '👋 **Hello!** I can help you book a spa service. What would you like to book today?\n\nYou can ask me about:\n- Available services\n- Pricing\n- Booking appointments'
     }
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -76,19 +124,20 @@ export default function Chatbot() {
     if (!user) {
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'You need to be logged in to use the chatbot. Please sign in or create an account.'
+        content: '**Authentication Required:** You need to be logged in to use the chatbot. Please [sign in](/login) or create an account.'
       }]);
       return;
     }
 
     // Add user message to chat
-    const userMessage = { role: 'user', content: inputValue };
+    const userMessage = { role: 'user', content: escapeHtml(inputValue) };
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
 
     try {
       // Call the FastAPI backend
+      // const response = await fetch('http://localhost:5432/api/chat', {
       const response = await fetch('https://rag-l6ua.onrender.com/api/chat', {
         method: 'POST',
         headers: {
@@ -107,6 +156,7 @@ export default function Chatbot() {
       const data = await response.json();
       
       // Add assistant response to chat
+      // We don't escape the response content as it will be rendered as markdown
       setMessages(prev => [...prev, { 
         role: 'assistant', 
         content: data.response,
@@ -126,7 +176,7 @@ export default function Chatbot() {
           // Add a message about redirecting
           setMessages(prev => [...prev, { 
             role: 'assistant', 
-            content: `I'll help you book a ${services[0]} on ${dates[0]} at ${times[0]}. Taking you to the booking page...`
+            content: `I'll help you book a **${services[0]}** on **${dates[0]}** at **${times[0]}**. Taking you to the booking page...`
           }]);
           
           // Wait a moment before redirecting
@@ -141,7 +191,7 @@ export default function Chatbot() {
       console.error('Error communicating with chatbot:', error);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: 'Sorry, I encountered an error. Please try again later.'
+        content: '**Error:** Sorry, I encountered an error. Please try again later.'
       }]);
     } finally {
       setIsLoading(false);
@@ -152,6 +202,7 @@ export default function Chatbot() {
   if (!user) {
     return (
       <div className="fixed bottom-6 right-6 z-50">
+        <style dangerouslySetInnerHTML={{ __html: markdownStyles }} />
         <button
           onClick={toggleChat}
           className="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-3 shadow-lg flex items-center justify-center"
@@ -200,6 +251,7 @@ export default function Chatbot() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
+      <style dangerouslySetInnerHTML={{ __html: markdownStyles }} />
       {/* Chat toggle button */}
       <button
         onClick={toggleChat}
@@ -247,14 +299,35 @@ export default function Chatbot() {
                       : 'bg-gray-200 text-gray-800'
                   }`}
                 >
-                  {message.content}
+                  {message.role === 'user' ? (
+                    message.content
+                  ) : (
+                    <div className="markdown-content">
+                      <ReactMarkdown
+                        components={{
+                          // Customize how specific markdown elements are rendered
+                          p: ({ node, ...props }) => <p className="mb-2" {...props} />,
+                          a: ({ node, ...props }) => <a className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer" {...props} />,
+                          ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-2" {...props} />,
+                          ol: ({ node, ...props }) => <ol className="list-decimal pl-5 mb-2" {...props} />,
+                          code: ({ node, inline, ...props }) => 
+                            inline 
+                              ? <code className="bg-gray-100 px-1 py-0.5 rounded text-sm" {...props} />
+                              : <code className="block bg-gray-100 p-2 rounded text-sm overflow-x-auto my-2" {...props} />
+                        }}
+                      >
+                        {message.content}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="text-left mb-3">
                 <div className="inline-block px-4 py-2 rounded-lg bg-gray-200 text-gray-800">
-                  <div className="flex space-x-1">
+                  <div className="flex space-x-1 items-center">
+                    <span className="text-xs text-gray-600 mr-2">Thinking</span>
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce"></div>
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                     <div className="w-2 h-2 bg-gray-500 rounded-full animate-bounce" style={{ animationDelay: '0.4s' }}></div>
@@ -314,10 +387,10 @@ export default function Chatbot() {
                         <li>
                           <button
                             type="button"
-                            onClick={() => handleSuggestionClick("How do I book a massage?")}
+                            onClick={() => handleSuggestionClick("Make a Booking for <service> on <date>, <time>")}
                             className="w-full text-left px-3 py-2 text-sm rounded-md hover:bg-gray-100 text-gray-700"
                           >
-                            How do I book a massage?
+                            Make a Booking for service on date, time
                           </button>
                         </li>
                       </ul>

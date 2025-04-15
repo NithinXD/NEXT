@@ -46,7 +46,7 @@ export default function Navbar() {
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="text-2xl font-bold text-blue-600">
-                Spa Booking
+                Red Trends
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -89,6 +89,22 @@ export default function Navbar() {
                 }`}
               >
                 Contact
+              </Link>
+              <Link
+                href="/docs"
+                className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium ${
+                  pathname === '/docs'
+                    ? 'border-blue-500 text-gray-900'
+                    : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 relative group'
+                }`}
+              >
+                Docs
+                {pathname !== '/docs' && (
+                  <span className="absolute top-3 -right-3 flex h-4 w-4">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                  </span>
+                )}
               </Link>
             </div>
           </div>
@@ -267,6 +283,23 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
+            </Link>
+            <Link
+              href="/docs"
+              className={`block pl-3 pr-4 py-2 border-l-4 text-base font-medium relative ${
+                pathname === '/docs'
+                  ? 'bg-blue-50 border-blue-500 text-blue-700'
+                  : 'border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700'
+              }`}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Docs
+              {pathname !== '/docs' && (
+                <span className="absolute top-3 right-3 flex h-4 w-4">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
+                </span>
+              )}
             </Link>
           </div>
           <div className="pt-4 pb-3 border-t border-gray-200">

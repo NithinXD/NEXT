@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import supabase from '../../lib/supabase';
 
 export default function Contact() {
@@ -123,7 +124,7 @@ export default function Contact() {
                   </div>
                   <div className="ml-3 text-gray-700">
                     <p className="font-medium">Hours</p>
-                    <p>Monday - Friday: 9am - 7pm</p>
+                    <p>Monday - Sunday: 9am - 7pm</p>
                   </div>
                 </div>
               </div>
@@ -252,6 +253,16 @@ export default function Contact() {
               <p className="text-gray-500">Map will be displayed here</p>
             </div>
           </div>
+        </div>
+        
+        {/* Documentation Link */}
+        <div className="mt-8 text-center">
+          <Link href="/docs" className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">
+            <span>View our Documentation</span>
+            <svg className="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+          </Link>
         </div>
       </div>
     </div>

@@ -20,7 +20,6 @@ export default function Register() {
     setLoading(true);
     setError(null);
 
-    // Validate passwords match
     if (password !== confirmPassword) {
       setError("Passwords don't match");
       setLoading(false);
@@ -28,7 +27,7 @@ export default function Register() {
     }
 
     try {
-      // Register the user
+      // Register user
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email,
         password,
